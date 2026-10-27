@@ -2,7 +2,7 @@
 <p class="uni">GSFC University</p>
 <h1>AI-Based Smart Helmet Detection System Using Deep Learning</h1>
 <p class="sub">Final Project Report</p>
-<p class="team">Purvarajsinh Jadeja (23BT04140, leader) · Ajay Valiya (23BT04167) · Maharsh Patel (23BT04101) · Manan Patel (23BT04103)</p>
+<p class="team">Purvrajsinh Jadeja (23BT04140, leader) · Ajay Valiya (23BT04167) · Maharsh Patel (23BT04101) · Manan Patel (23BT04103)</p>
 <p class="team">Faculty Guide: Prof. Anjali Diwan</p>
 <p class="date">October 2026</p>
 </div>
