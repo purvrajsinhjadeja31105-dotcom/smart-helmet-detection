@@ -1,0 +1,34 @@
+# Python
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.venv/
+venv/
+*.egg-info/
+
+# Runtime folders (created by the app)
+uploads/
+outputs/
+reports/
+logs/
+
+# Model weights: only the two final models are versioned.
+# The COCO detector (models/coco/yolo26m.pt) downloads automatically on first run.
+models/**
+!models/
+!models/README.md
+!models/helmet/
+!models/helmet/helmet_best.pt
+!models/plate/
+!models/plate/plate_crop_best.pt
+
+# Local demo material (third-party images and large videos, not redistributed)
+demo_dataset/
+DEMO.md
+
+# Editors / OS
+.vscode/
+.idea/
+.claude/
+Thumbs.db
+.DS_Store

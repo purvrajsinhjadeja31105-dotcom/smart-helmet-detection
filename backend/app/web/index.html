@@ -1,0 +1,128 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Smart Helmet Detection</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <header class="topbar">
+    <div class="brand">
+      <span class="brand-mark" aria-hidden="true"></span>
+      <div>
+        <h1>Smart Helmet Detection</h1>
+        <p>Upload a traffic image or video to find riders without helmets and read their number plates</p>
+      </div>
+    </div>
+    <span id="status" class="status status-wait">Checking system…</span>
+  </header>
+
+  <main>
+    <!-- 1. Upload -->
+    <section id="upload-card" class="card">
+      <h2>1. Upload</h2>
+      <label id="dropzone" class="dropzone" for="file-input">
+        <input id="file-input" type="file" accept="image/*,video/*" hidden>
+        <span class="drop-icon" aria-hidden="true">⬆</span>
+        <span class="drop-title">Drag and drop an image or video here</span>
+        <span class="drop-sub">or click to browse · JPG, PNG, WEBP, MP4, AVI, MOV · up to 500 MB</span>
+      </label>
+
+      <div id="selected" class="selected hidden">
+        <div class="preview-box">
+          <img id="preview-img" alt="Selected image preview" class="hidden">
+          <video id="preview-video" class="hidden" muted controls></video>
+        </div>
+        <div class="selected-info">
+          <p id="file-name" class="file-name"></p>
+          <p id="file-meta" class="muted"></p>
+          <label class="check"><input id="remove-rain" type="checkbox"> Remove rain streaks (optional)</label>
+          <label id="all-plates-row" class="check"><input id="all-plates" type="checkbox"> Read all number plates, not only violators' (images)</label>
+          <div class="actions">
+            <button id="analyse-btn" class="btn btn-primary">Analyse</button>
+            <button id="change-btn" class="btn btn-ghost">Choose another file</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 2. Progress -->
+    <section id="progress-card" class="card hidden">
+      <h2>2. Processing</h2>
+      <p id="progress-label" class="muted">Uploading…</p>
+      <div class="bar"><div id="progress-fill" class="bar-fill"></div></div>
+      <p id="progress-note" class="muted small"></p>
+    </section>
+
+    <div id="error" class="error hidden" role="alert"></div>
+
+    <!-- 3. Results -->
+    <section id="results" class="hidden">
+      <div class="card">
+        <div class="results-head">
+          <h2>3. Results</h2>
+          <div class="actions">
+            <a id="dl-media" class="btn btn-primary" download>Download processed file</a>
+            <a id="dl-report" class="btn btn-ghost" download>Download report (JSON)</a>
+            <button id="again-btn" class="btn btn-ghost">Analyse another file</button>
+          </div>
+        </div>
+
+        <div id="verdict" class="verdict"></div>
+
+        <div class="stats">
+          <div class="stat"><span id="s-moto" class="stat-num">0</span><span class="stat-label">Motorcycles</span></div>
+          <div class="stat stat-bad"><span id="s-viol" class="stat-num">0</span><span class="stat-label">Violations (no helmet)</span></div>
+          <div class="stat stat-good"><span id="s-safe" class="stat-num">0</span><span class="stat-label">Safe (helmet)</span></div>
+          <div class="stat"><span id="s-unk" class="stat-num">0</span><span class="stat-label">Unknown (no head visible)</span></div>
+          <div class="stat"><span id="s-time" class="stat-num">0</span><span class="stat-label">Processing time</span></div>
+        </div>
+        <p id="enh-note" class="muted small"></p>
+      </div>
+
+      <div id="image-view" class="card hidden">
+        <h3>Original vs processed</h3>
+        <div class="compare">
+          <figure><img id="orig-img" alt="Original upload"><figcaption>Original</figcaption></figure>
+          <figure><img id="proc-img" alt="Processed result with detection boxes"><figcaption>Processed · red = no helmet · green = helmet · yellow = number plate</figcaption></figure>
+        </div>
+      </div>
+
+      <div id="video-view" class="card hidden">
+        <h3>Processed video</h3>
+        <video id="proc-video" controls class="video"></video>
+        <p class="muted small">Red = violation · green = safe · grey = unknown · each motorcycle keeps its track number (#)</p>
+      </div>
+
+      <div class="card">
+        <h3>Violation report</h3>
+        <p id="no-viol" class="muted hidden">No helmet violations were found.</p>
+        <div class="table-wrap">
+          <table id="viol-table" class="hidden">
+            <thead>
+              <tr><th>#</th><th>Evidence</th><th>Number plate</th><th>Plate number</th><th>OCR confidence</th><th>Riders (est.)</th><th id="col-extra">No-helmet confidence</th></tr>
+            </thead>
+            <tbody id="viol-body"></tbody>
+          </table>
+        </div>
+      </div>
+
+      <div id="plates-card" class="card hidden">
+        <h3>All number plates read</h3>
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr><th>#</th><th>Number plate</th><th>Plate number</th><th>Plate detection</th><th>OCR confidence</th><th>Rider status</th></tr>
+            </thead>
+            <tbody id="plates-body"></tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="foot">AI-Based Smart Helmet Detection System Using Deep Learning · runs locally on this computer</footer>
+  <script src="app.js"></script>
+</body>
+</html>

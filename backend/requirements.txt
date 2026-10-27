@@ -1,0 +1,14 @@
+# Install PyTorch first if you have an NVIDIA GPU (see https://pytorch.org - pick your CUDA version);
+# otherwise the CPU build installed by ultralytics is used automatically.
+ultralytics>=8.4.170
+opencv-python-headless>=4.10
+numpy>=1.26
+paddlepaddle>=3.0          # paddlepaddle-gpu for GPU OCR (optional; OCR is fast enough on CPU)
+paddleocr>=3.0
+imageio-ffmpeg>=0.5        # H.264 output so processed videos play in the browser
+fastapi>=0.115
+uvicorn[standard]>=0.30
+python-multipart>=0.0.9
+# development / tests
+pytest>=8
+httpx>=0.27
