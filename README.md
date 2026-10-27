@@ -165,12 +165,7 @@ After cleaning and de-duplication: **5,593** helmet images and **4,708** plate i
 
 ## Team
 
-Built at **GSFC University** under the guidance of **Prof. Anjali Diwan**.
-
-| | |
-|---|---|
-| Purvarajsinh Jadeja | Ajay Valiya |
-| Maharsh Patel | Manan Patel |
+**Purvrajsinh Jadeja**
 
 ## License
 
